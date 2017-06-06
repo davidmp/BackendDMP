@@ -20,14 +20,18 @@ import pe.edu.upeu.model.Dientes;
 @Transactional
 public class DientesServisImpl implements DientesServis{
  
- @Autowired
- public DientesDao dao;
- 
- @Override
- public List<Dientes> listarDientes(){
- return dao.listarDientes();
- }
- 
- 
+    @Autowired
+    public DientesDao dao;
+
+    @Override
+    public List<Dientes> listarEntidad(){ return dao.listarEntidad();}
+    @Override
+    public Dientes guardarEntidad(Dientes entidad){ return dao.guardarEntidad(entidad);}
+    @Override
+    public void modificarEntidad(Dientes entidad){dao.modificarEntidad(entidad);}
+    @Override
+    public void eliminarEntidad(Integer id){dao.eliminarEntidad(id);}
+    @Override
+    public Dientes buscarEntidadId(int id){ return dao.buscarEntidadId(id);}
  
 }

@@ -87,7 +87,7 @@ public abstract class SysDataAccess<PK extends Serializable, E>{
                 this.logger.info("Mensage de Error en Al momento de Eliminar " + e.getMessage());
               }
         }  
-        public void delete(Serializable id){
+        public void delete(Integer id){
               try{                
                 getSession().delete(getSession().get(this.persistentClass, id));
               }catch (Exception e){
@@ -96,7 +96,7 @@ public abstract class SysDataAccess<PK extends Serializable, E>{
         }  
         public void delete(int id){
               try{
-                getSession().delete(getSession().get(this.persistentClass, Integer.valueOf(id)));
+                getSession().delete(getSession().get(this.persistentClass, id));
               }catch (Exception e){
                 this.logger.info("Mensage de Error en Al momento de Eliminar " + e.getMessage());
               }
@@ -120,7 +120,7 @@ public abstract class SysDataAccess<PK extends Serializable, E>{
         public E getById(int id){
               E entidad = null;
               try{
-                entidad = (E)(Serializable)getSession().get(this.persistentClass, Integer.valueOf(id));
+                entidad = (E)(Serializable)getSession().get(this.persistentClass, id);
               }catch (Exception e){
                 this.logger.info("Mensage de Error en Al momento de Buscar por el Id " + e.getMessage());
               }
@@ -184,7 +184,7 @@ public abstract class SysDataAccess<PK extends Serializable, E>{
         public List<E> getListId(int id){
                   List<E> lista = null;
                   try{
-                    lista = getSession().createCriteria(this.persistentClass).add(Restrictions.idEq(Integer.valueOf(id))).list();
+                    lista = getSession().createCriteria(this.persistentClass).add(Restrictions.idEq(id)).list();
                     if (lista == null) {
                       lista = new ArrayList();
                     }

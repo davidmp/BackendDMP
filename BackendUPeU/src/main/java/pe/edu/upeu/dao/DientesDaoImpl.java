@@ -18,8 +18,10 @@ import pe.edu.upeu.model.Dientes;
 public class DientesDaoImpl extends SysDataAccess<Integer, Dientes> implements DientesDao{
     
     @SuppressWarnings("unchecked")
-    public List<Dientes> listarDientes(){
-        return getListAll();
-    }
-    
+    public List<Dientes> listarEntidad(){return getListAll();}
+    public Dientes guardarEntidad(Dientes entidad){ return save(entidad);}
+    public void modificarEntidad(Dientes entidad){update(entidad);}
+    public void eliminarEntidad(Integer id){delete(id);}
+    public Dientes buscarEntidadId(int id){return getById(id);}
+        
 }
