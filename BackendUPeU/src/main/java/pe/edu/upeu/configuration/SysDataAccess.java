@@ -87,7 +87,7 @@ public abstract class SysDataAccess<PK extends Serializable, E>{
                 this.logger.info("Mensage de Error en Al momento de Eliminar " + e.getMessage());
               }
         }  
-        public void delete(Integer id){
+        public void delete(Serializable id){
               try{                
                 getSession().delete(getSession().get(this.persistentClass, id));
               }catch (Exception e){

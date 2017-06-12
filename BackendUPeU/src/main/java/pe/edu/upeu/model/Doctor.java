@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,7 +27,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "doctor")
@@ -38,8 +37,8 @@ public class Doctor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idDoctor")
     private Integer idDoctor;
     @Basic(optional = false)
@@ -58,11 +57,14 @@ public class Doctor implements Serializable {
     @Column(name = "estado")
     private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDoctor")
+    @JsonIgnore
     private List<Citas> citasList;
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Persona idPersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDoctor")
+    @JsonIgnore
     private List<Diagnostico> diagnosticoList;
 
     public Doctor() {

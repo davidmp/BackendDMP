@@ -9,7 +9,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 
-public class AppInitializer extends SpringBootServletInitializer {
+public class AppServletInitializer extends SpringBootServletInitializer {
 
         @Override
 	public void onStartup(ServletContext container) throws ServletException {

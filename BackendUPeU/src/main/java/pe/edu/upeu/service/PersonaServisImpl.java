@@ -9,31 +9,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pe.edu.upeu.dao.DientesDao;
-import pe.edu.upeu.model.Dientes;
+import pe.edu.upeu.dao.PersonaDao;
+import pe.edu.upeu.model.Persona;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
-@Service("dientesServis")
+@Service("personaServis")
 @Transactional
-public class DientesServisImpl implements DientesServis{
- 
+public class PersonaServisImpl implements PersonaServis{
+    
     @Autowired
-    public DientesDao dao;
+    public PersonaDao dao;
  
     @Override
-    public List<Dientes> listarEntidad(){return dao.listarEntidad();}
+    public List<Persona> listarEntidad(){return dao.listarEntidad();}
     @Override
-    public Dientes buscarEntidadId(int id) {return dao.buscarEntidadId(id);}
+    public Persona buscarEntidadId(int id) {return dao.buscarEntidadId(id);}
     @Override
-    public void guardarEntidad(Dientes diente) {dao.guardarEntidad(diente); }  
+    public void guardarEntidad(Persona entidad) {dao.guardarEntidad(entidad); }  
     @Override
     public void eliminarEntidadId(int id) {dao.eliminarEntidadId(id);}    
     @Override
-    public void modificarEntidadId(Dientes diente) {dao.modificarEntidadId(diente);}   
- 
- 
- 
+    public void modificarEntidadId(Persona entidad) {dao.modificarEntidadId(entidad);}      
 }

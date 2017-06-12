@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,7 +27,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "paciente")
@@ -38,8 +37,8 @@ public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idPaciente")
     private Integer idPaciente;
     @Basic(optional = false)
@@ -72,16 +71,14 @@ public class Paciente implements Serializable {
     @Column(name = "fechaAlta")
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "estado_1")
-    private String estado1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
+    @JsonIgnore
     private List<Analisis> analisisList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
+    @JsonIgnore
     private List<Citas> citasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
+    @JsonIgnore
     private List<Diagnostico> diagnosticoList;
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
     @ManyToOne(optional = false)
@@ -94,7 +91,7 @@ public class Paciente implements Serializable {
         this.idPaciente = idPaciente;
     }
 
-    public Paciente(Integer idPaciente, String estado, String codigoPaciente, String lugarNacimiento, String ocupacion, String procedencia, Date fechaAlta, String estado1) {
+    public Paciente(Integer idPaciente, String estado, String codigoPaciente, String lugarNacimiento, String ocupacion, String procedencia, Date fechaAlta) {
         this.idPaciente = idPaciente;
         this.estado = estado;
         this.codigoPaciente = codigoPaciente;
@@ -102,7 +99,6 @@ public class Paciente implements Serializable {
         this.ocupacion = ocupacion;
         this.procedencia = procedencia;
         this.fechaAlta = fechaAlta;
-        this.estado1 = estado1;
     }
 
     public Integer getIdPaciente() {
@@ -159,14 +155,6 @@ public class Paciente implements Serializable {
 
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
-    }
-
-    public String getEstado1() {
-        return estado1;
-    }
-
-    public void setEstado1(String estado1) {
-        this.estado1 = estado1;
     }
 
     public List<Analisis> getAnalisisList() {

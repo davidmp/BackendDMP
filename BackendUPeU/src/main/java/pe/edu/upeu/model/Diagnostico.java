@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,7 +27,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "diagnostico")
@@ -38,8 +37,8 @@ public class Diagnostico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idDiagnostico")
     private Integer idDiagnostico;
     @Basic(optional = false)
@@ -65,13 +64,14 @@ public class Diagnostico implements Serializable {
     @Size(min = 1, max = 80)
     @Column(name = "otros")
     private String otros;
-    @JoinColumn(name = "idPaciente", referencedColumnName = "idPaciente")
-    @ManyToOne(optional = false)
-    private Paciente idPaciente;
     @JoinColumn(name = "idDoctor", referencedColumnName = "idDoctor")
     @ManyToOne(optional = false)
     private Doctor idDoctor;
+    @JoinColumn(name = "idPaciente", referencedColumnName = "idPaciente")
+    @ManyToOne(optional = false)
+    private Paciente idPaciente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDiagnostico")
+    @JsonIgnore
     private List<DetalleDiagnostico> detalleDiagnosticoList;
 
     public Diagnostico() {
@@ -137,20 +137,20 @@ public class Diagnostico implements Serializable {
         this.otros = otros;
     }
 
-    public Paciente getIdPaciente() {
-        return idPaciente;
-    }
-
-    public void setIdPaciente(Paciente idPaciente) {
-        this.idPaciente = idPaciente;
-    }
-
     public Doctor getIdDoctor() {
         return idDoctor;
     }
 
     public void setIdDoctor(Doctor idDoctor) {
         this.idDoctor = idDoctor;
+    }
+
+    public Paciente getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(Paciente idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public List<DetalleDiagnostico> getDetalleDiagnosticoList() {

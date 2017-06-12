@@ -12,18 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pe.edu.upeu.service.DientesServis;
-
+import pe.edu.upeu.service.ExamenEstomatologicoServis;
 /**
  *
  * @author Alumnos
  */
 @Controller
-@RequestMapping("/")
-public class DientesCcontroller {
-    
+@RequestMapping("/exEstomat")
+public class ExamenEstomatologicoCController {
+      
     @Autowired
-    public DientesServis service;
+    public ExamenEstomatologicoServis service;
 
     @Autowired
     MessageSource messageSource;
@@ -33,5 +32,4 @@ public class DientesCcontroller {
         model.addAttribute("attribute", "value");
         return "index";
     }
-    
 }

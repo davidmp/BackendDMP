@@ -12,8 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,7 +22,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "dientes")
@@ -34,8 +32,8 @@ public class Dientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idDientes")
     private Integer idDientes;
     @Basic(optional = false)
@@ -58,8 +56,6 @@ public class Dientes implements Serializable {
     @Size(min = 1, max = 5)
     @Column(name = "tipoDiente")
     private String tipoDiente;
-    
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDientes")
     @JsonIgnore
     private List<DetalleDiagnostico> detalleDiagnosticoList;

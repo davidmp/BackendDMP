@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +26,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "citas")
@@ -37,8 +36,8 @@ public class Citas implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idCitas")
     private Integer idCitas;
     @Basic(optional = false)
@@ -57,17 +56,19 @@ public class Citas implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date horaFin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCitas")
+    @JsonIgnore
     private List<Signosvitales> signosvitalesList;
-    @JoinColumn(name = "idTrabajo", referencedColumnName = "idTrabajo")
-    @ManyToOne(optional = false)
-    private Trabajador idTrabajo;
     @JoinColumn(name = "idDoctor", referencedColumnName = "idDoctor")
     @ManyToOne(optional = false)
     private Doctor idDoctor;
     @JoinColumn(name = "idPaciente", referencedColumnName = "idPaciente")
     @ManyToOne(optional = false)
     private Paciente idPaciente;
+    @JoinColumn(name = "idTrabajo", referencedColumnName = "idTrabajo")
+    @ManyToOne(optional = false)    
+    private Trabajador idTrabajo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCitas")
+    @JsonIgnore
     private List<Tratamiento> tratamientoList;
 
     public Citas() {
@@ -124,14 +125,6 @@ public class Citas implements Serializable {
         this.signosvitalesList = signosvitalesList;
     }
 
-    public Trabajador getIdTrabajo() {
-        return idTrabajo;
-    }
-
-    public void setIdTrabajo(Trabajador idTrabajo) {
-        this.idTrabajo = idTrabajo;
-    }
-
     public Doctor getIdDoctor() {
         return idDoctor;
     }
@@ -146,6 +139,14 @@ public class Citas implements Serializable {
 
     public void setIdPaciente(Paciente idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    public Trabajador getIdTrabajo() {
+        return idTrabajo;
+    }
+
+    public void setIdTrabajo(Trabajador idTrabajo) {
+        this.idTrabajo = idTrabajo;
     }
 
     public List<Tratamiento> getTratamientoList() {

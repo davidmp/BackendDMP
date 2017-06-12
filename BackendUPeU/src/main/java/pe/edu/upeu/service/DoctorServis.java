@@ -6,16 +6,16 @@
 package pe.edu.upeu.service;
 
 import java.util.List;
-import pe.edu.upeu.model.Dientes;
+import pe.edu.upeu.model.Doctor;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
-public interface DientesServis {
-    public List<Dientes> listarEntidad();
-    public Dientes buscarEntidadId(int id);
-    public void guardarEntidad(Dientes diente);
+public interface DoctorServis {
+    public List<Doctor> listarEntidad();
+    public Doctor buscarEntidadId(int id);
+    public void guardarEntidad(Doctor entidad);
     public void eliminarEntidadId(int id);
-    public void modificarEntidadId(Dientes diente);    
+    public void modificarEntidadId(Doctor entidad);    
 }

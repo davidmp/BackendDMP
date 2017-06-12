@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,7 +27,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "tratamiento")
@@ -38,8 +37,8 @@ public class Tratamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idTratamiento")
     private Integer idTratamiento;
     @Basic(optional = false)
@@ -60,6 +59,7 @@ public class Tratamiento implements Serializable {
     @ManyToOne(optional = false)
     private Citas idCitas;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTratamiento")
+    @JsonIgnore
     private List<DetalleTratamiento> detalleTratamientoList;
 
     public Tratamiento() {

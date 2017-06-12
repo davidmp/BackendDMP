@@ -8,20 +8,18 @@ package pe.edu.upeu.dao;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import pe.edu.upeu.configuration.SysDataAccess;
-import pe.edu.upeu.model.Dientes;
+import pe.edu.upeu.model.Doctor;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
-@Repository("dientesDao")
-public class DientesDaoImpl extends SysDataAccess<Integer, Dientes> implements DientesDao{
-    
+@Repository("doctorDao")
+public class DoctorDaoImpl extends SysDataAccess<Integer, Doctor> implements DoctorDao{
     @SuppressWarnings("unchecked")
-    public List<Dientes> listarEntidad(){ return getListAll();}
-    public Dientes buscarEntidadId(int id) {return getByKey(id);}
-    public void guardarEntidad(Dientes diente) {savev(diente); }  
+    public List<Doctor> listarEntidad(){ return getListAll();}
+    public Doctor buscarEntidadId(int id) {return getByKey(id);}
+    public void guardarEntidad(Doctor entidad) {savev(entidad); }  
     public void eliminarEntidadId(int id) {delete(id);}    
-    public void modificarEntidadId(Dientes diente) {update(diente);}  
-    
+    public void modificarEntidadId(Doctor entidad) {update(entidad);}         
 }

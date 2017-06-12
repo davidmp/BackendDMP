@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +20,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "detalle_tratamiento")
@@ -32,8 +30,8 @@ public class DetalleTratamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idDetalleTratamiento")
     private Integer idDetalleTratamiento;
     @Basic(optional = false)
@@ -88,12 +86,12 @@ public class DetalleTratamiento implements Serializable {
     @NotNull
     @Column(name = "importe")
     private double importe;
-    @JoinColumn(name = "idTratamiento", referencedColumnName = "idTratamiento")
-    @ManyToOne(optional = false)
-    private Tratamiento idTratamiento;
     @JoinColumn(name = "idDetallediagnostico", referencedColumnName = "idDetallediagnostico")
     @ManyToOne(optional = false)
     private DetalleDiagnostico idDetallediagnostico;
+    @JoinColumn(name = "idTratamiento", referencedColumnName = "idTratamiento")
+    @ManyToOne(optional = false)
+    private Tratamiento idTratamiento;
 
     public DetalleTratamiento() {
     }
@@ -213,20 +211,20 @@ public class DetalleTratamiento implements Serializable {
         this.importe = importe;
     }
 
-    public Tratamiento getIdTratamiento() {
-        return idTratamiento;
-    }
-
-    public void setIdTratamiento(Tratamiento idTratamiento) {
-        this.idTratamiento = idTratamiento;
-    }
-
     public DetalleDiagnostico getIdDetallediagnostico() {
         return idDetallediagnostico;
     }
 
     public void setIdDetallediagnostico(DetalleDiagnostico idDetallediagnostico) {
         this.idDetallediagnostico = idDetallediagnostico;
+    }
+
+    public Tratamiento getIdTratamiento() {
+        return idTratamiento;
+    }
+
+    public void setIdTratamiento(Tratamiento idTratamiento) {
+        this.idTratamiento = idTratamiento;
     }
 
     @Override

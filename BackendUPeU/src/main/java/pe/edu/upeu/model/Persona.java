@@ -5,6 +5,8 @@
  */
 package pe.edu.upeu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -70,11 +75,13 @@ public class Persona implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "telefono")
     private String telefono;
+    
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_nacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Column(name = "fecha_nacimiento", nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    private LocalDate fechaNacimiento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -86,10 +93,13 @@ public class Persona implements Serializable {
     @Column(name = "password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    @JsonIgnore
     private List<Doctor> doctorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    @JsonIgnore
     private List<Trabajador> trabajadorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    @JsonIgnore
     private List<Paciente> pacienteList;
 
     public Persona() {
@@ -99,7 +109,7 @@ public class Persona implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public Persona(Integer idPersona, String nombres, String apellPaterno, String apellMater, String dni, String direccion, String telefono, Date fechaNacimiento, String usuario, String password) {
+    public Persona(Integer idPersona, String nombres, String apellPaterno, String apellMater, String dni, String direccion, String telefono, LocalDate fechaNacimiento, String usuario, String password) {
         this.idPersona = idPersona;
         this.nombres = nombres;
         this.apellPaterno = apellPaterno;
@@ -168,11 +178,11 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

@@ -6,16 +6,16 @@
 package pe.edu.upeu.dao;
 
 import java.util.List;
-import pe.edu.upeu.model.Dientes;
+import pe.edu.upeu.model.Persona;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
-public interface DientesDao {
-    public List<Dientes> listarEntidad();
-    public Dientes buscarEntidadId(int id);
-    public void guardarEntidad(Dientes diente);
+public interface PersonaDao {
+    public List<Persona> listarEntidad();
+    public Persona buscarEntidadId(int id);
+    public void guardarEntidad(Persona diente);
     public void eliminarEntidadId(int id);
-    public void modificarEntidadId(Dientes diente);
+    public void modificarEntidadId(Persona diente);    
 }

@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,7 +27,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumnos
+ * @author David
  */
 @Entity
 @Table(name = "trabajador")
@@ -38,8 +37,8 @@ public class Trabajador implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idTrabajo")
     private Integer idTrabajo;
     @Basic(optional = false)
@@ -52,12 +51,8 @@ public class Trabajador implements Serializable {
     @Column(name = "fechaAlta")
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "estado_1")
-    private String estado1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrabajo")
+    @JsonIgnore
     private List<Citas> citasList;
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
     @ManyToOne(optional = false)
@@ -70,11 +65,10 @@ public class Trabajador implements Serializable {
         this.idTrabajo = idTrabajo;
     }
 
-    public Trabajador(Integer idTrabajo, String estado, Date fechaAlta, String estado1) {
+    public Trabajador(Integer idTrabajo, String estado, Date fechaAlta) {
         this.idTrabajo = idTrabajo;
         this.estado = estado;
         this.fechaAlta = fechaAlta;
-        this.estado1 = estado1;
     }
 
     public Integer getIdTrabajo() {
@@ -99,14 +93,6 @@ public class Trabajador implements Serializable {
 
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
-    }
-
-    public String getEstado1() {
-        return estado1;
-    }
-
-    public void setEstado1(String estado1) {
-        this.estado1 = estado1;
     }
 
     public List<Citas> getCitasList() {
